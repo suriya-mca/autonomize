@@ -1,25 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import UserProvider from './context/UserProvider';
+import SearchForm from './components/SearchForm';
+import UserDetails from './components/UserDetails';
+import RepoList from './components/RepoList';
+import RepoDetails from './components/RepoDetails';
+import FollowersList from './components/FollowersList';
 
-function App() {
+const App = () => {
+  const [selectedRepo, setSelectedRepo] = useState(null);
+
+  const handleSelectRepo = (repo) => setSelectedRepo(repo);
+  const handleBackToRepoList = () => setSelectedRepo(null);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <UserProvider>
+      <div className="App">
+        <SearchForm />
+        <UserDetails />
+        {!selectedRepo && (
+          <>
+            <RepoList onSelectRepo={handleSelectRepo} />
+            <FollowersList />
+          </>
+        )}
+        {selectedRepo && <RepoDetails repo={selectedRepo} onBack={handleBackToRepoList} />}
+      </div>
+    </UserProvider>
   );
-}
+};
 
 export default App;
