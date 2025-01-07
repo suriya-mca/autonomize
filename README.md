@@ -97,7 +97,7 @@ http://localhost:3000
 
 ## **API Endpoints**
 
-Base URL: http://localhost:3000/api
+Base URL: http://localhost:5000/api
 
 1. Save GitHub User: POST /user
 2. Get Mutual Friends: POST /user/:username/friends
