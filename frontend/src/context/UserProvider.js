@@ -11,7 +11,7 @@ const UserProvider = ({ children }) => {
   const fetchUserData = async (username) => {
     setLoading(true);
     try {
-      const userRes = await axios.post('http://localhost:3000/api/user', { username });
+      const userRes = await axios.post('http://localhost:5000/api/user', { username });
       setUser(userRes.data);
 
       const reposRes = await axios.get(`https://api.github.com/users/${username}/repos`);
